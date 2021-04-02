@@ -1,0 +1,14 @@
+* Scramblies
+** Hosting
+   Hosted for your convenience at http://scramblies.tuppu.net 
+** Tests
+#+begin_src sh
+  myvn verify
+#+end_src
+** Running locally
+Download release and run on the command line:
+#+begin_src sh
+  java -Dhttp.port=XXXX -jar flexiana-0.1.0.jar
+#+end_src
+Direct your browser to http://localhost:XXXX where XXXX is any free port on your machine
+
