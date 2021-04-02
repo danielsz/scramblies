@@ -6,9 +6,9 @@
   myvn verify
 #+end_src
 ** Running locally
-Download release and run on the command line:
+[[https://github.com/danielsz/scramblies/releases/latest][Download]] the latest release and run on the command line:
 #+begin_src sh
-  java -Dhttp.port=XXXX -jar flexiana-0.1.0.jar
+  java -Dhttp.port=XXXX -jar flexiana-0.1.1.jar
 #+end_src
 Direct your browser to http://localhost:XXXX where XXXX is any free port on your machine
 
