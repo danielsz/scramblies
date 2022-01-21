@@ -32,10 +32,11 @@
 ;; iterative recursion
 
 (defn scramble5? [s1 s2]
-  (letfn [(iter [s1 s2 ] (when (seq s2)
-                          (if (str/includes? s1 (subs s2 0 1))
-                            (iter s1 (subs s2 1))
-                            false)))]
+  (letfn [(iter [s1 s2 ]
+            (when (seq s2)
+              (if (str/includes? s1 (subs s2 0 1))
+                (iter s1 (subs s2 1))
+                false)))]
     (nil? (iter s1 s2))))
 
 ;;; benchmark
