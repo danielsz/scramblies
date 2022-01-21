@@ -1,17 +1,18 @@
 (ns flexiana.scramblies
-  (:require [clojure.set :refer [subset?]]))
-
-;; functional style
-
-(defn scramble1?
-  [s1 s2]
-  (every? (set s1) s2))
+  (:require [clojure.set :refer [subset?]]
+            [clojure.string :as str]))
 
 ;; sets
 
-(defn scramble2?
+(defn scramble1?
   [s1 s2]
   (subset? (set s2) (set s1)))
+
+;; functional style, higher-order function
+
+(defn scramble2?
+  [s1 s2]
+  (every? (set s1) s2))
 
 ;; frequencies
 
@@ -22,12 +23,11 @@
 ;; scheme style
 
 (defn scramble4? [s1 s2]
-  (let [y (seq s1)]
-    (not (loop [x (seq s2)]
-           (when (seq x)
-             (if (some (set `(~(first x))) y)
-               (recur (rest x))
-               true))))))
+  (not (loop [x s2]
+         (when (seq x)
+           (if (str/includes? s1 (subs x 0 1))
+             (recur (subs x 1))
+             true)))))
 
 ;;; benchmark
 

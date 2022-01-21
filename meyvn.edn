@@ -4,8 +4,6 @@
        :name "flexiana"},
  :packaging {:uberjar {:enabled true,
                        :build-properties {:main-class "flexiana.core"},
-                       :remote-repository {:id "ssh-repository",
-                                           :url "scpexe://danielsz@dan.tuppu.net:/home/danielsz/.m2/repository"},
                        :excludes {:artifacts ["org.clojure:google-closure-library"],
                                   :filters ["META-INF/*.MF" "META-INF/*.SF" "META-INF/*.DSA" "META-INF/*.RSA"]}
                        :include-source false,
@@ -33,8 +31,7 @@
                                    :images {:enabled false
                                             :png {:dirs []}
                                             :jpg {:dirs []}}}},
-             :jar {:enabled false,
-                   :remote-repository {:id "clojars", :url "https://clojars.org/repo"}}},
+             :jar {:enabled false}},
  :testing {:enabled true, :tools-deps-alias :test},
  :scm {:enabled false},
  :interactive {:enabled true,
@@ -76,4 +73,6 @@
             :development {:http-port "3085"}
             :production {:http-port "8027"
                          :repl-port "8028"
-                         :repl-ip "127.0.0.1"}}}
+                         :repl-ip "127.0.0.1"}}
+ :distribution-management {:id "ssh-repository",
+                           :url "scpexe://danielsz@dan.tuppu.net:/home/danielsz/.m2/repository"}}
