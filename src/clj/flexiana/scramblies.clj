@@ -20,7 +20,7 @@
   (let [freqs (frequencies s1)]
     (reduce (fn [x y] (or (and x (contains? freqs y)) (reduced false))) true (seq s2))))
 
-;; scheme style
+;; scheme style, tail call optimization
 
 (defn scramble4? [s1 s2]
   (not (loop [x s2]
@@ -28,6 +28,15 @@
            (if (str/includes? s1 (subs x 0 1))
              (recur (subs x 1))
              true)))))
+
+;; iterative recursion
+
+(defn scramble5? [s1 s2]
+  (letfn [(iter [s1 s2 ] (when (seq s2)
+                          (if (str/includes? s1 (subs s2 0 1))
+                            (iter s1 (subs s2 1))
+                            false)))]
+    (nil? (iter s1 s2))))
 
 ;;; benchmark
 
