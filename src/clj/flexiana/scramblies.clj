@@ -8,7 +8,7 @@
   [s1 s2]
   (subset? (set s2) (set s1)))
 
-;; functional style, higher-order function
+;; functional style
 
 (defn scramble2?
   [s1 s2]
@@ -39,6 +39,23 @@
                 false)))]
     (nil? (iter s1 s2))))
 
+;; vectors
+
+(defn scramble6? [s1 s2]
+  (let [s1 (vec s1)
+        s2 (vec s2)]
+    (not (loop [x s2]
+           (when (seq x)
+             (if (some #{(peek x)} s1)
+               (recur (pop x))
+               true))))))
+
+;; vectors reduce
+
+(defn scramble7? [s1 s2]
+  (let [s1 (vec s1)]
+    (reduce (fn [x y] (or (some #(= y %) s1) (reduced false))) true (vec s2))))
+
 ;;; benchmark
 
 (defmacro bench
@@ -48,3 +65,9 @@
          r# ~body]
      {:time (/ (double (- (. System (nanoTime)) start#)) 1000000.0)
       :result r#}))
+
+(defn benchmark [s1 s2 & fs]
+  (doseq [f fs]
+    (println (munge f) ":" (bench (f s1 s2)))))
+
+; (benchmark "cedewaraaossoqqyt" "codewars" scramble1? scramble2? scramble3? scramble4? scramble5? scramble6? scramble7?)
